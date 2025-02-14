@@ -1,0 +1,80 @@
+----------------------------------------------------------------------------------------------------
+step1: create new API
+	title: OpenAPI specification for CMS
+	description: API specification document of CMS system
+	contact: deep dabhi
+	version: 1.0
+
+step2: identify the tye of API
+	public
+
+----------------------------------------------------------------------------------------------------
+Overview of RESTful APIs
+step3: Identify the server base URL
+	http://{hostname}:{port}/{directory}
+	http://localhost:44333/
+	
+----------------------------------------------------------------------------------------------------
+Designing API resources
+step4: Identify the resources
+	course
+	student
+
+step5: Have the Resources as plural
+	courses(/api/courses)
+	students(/api/students)
+	
+	notes:
+		while making resources, use lowercase and make it plural
+		on multiple words in resources use - (hyphen) to separate them (e.g. elite-customers)
+		
+step6: Defining the resources models
+	course model
+		course id
+		course name
+		course duration
+		course type
+	student model
+		student id
+		first name
+		last name
+		phone number
+		address
+		
+step7: select the identifier for each resource
+	course model
+		course id (IDENTIFIER)
+		course name
+		course duration
+		course type
+	student model
+		student id (IDENTIFIER)
+		first name
+		last name
+		phone number
+		address
+
+----------------------------------------------------------------------------------------------------
+Designing Associations between Resources
+step8: identify the Associations for each resource
+    courses
+        /api/courses/{courseId}/students
+        /api/courses/{courseId}/course-subjects
+    
+    students
+        None
+
+step9: check for url complexity
+    URL should be less complex and follow below mentioned format:
+        collection/item/collection
+        e.g. /api/colleges
+        e.g. /api/colleges/10
+        e.g. /api/colleges/10/students
+    courses
+        /api/courses
+        /api/courses/{courseId}
+        /api/courses/{courseId}/students
+    
+    students
+        /api/students
+        /api/students/{studentId}
