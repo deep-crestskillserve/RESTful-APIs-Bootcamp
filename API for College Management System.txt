@@ -1,0 +1,234 @@
+API for College Management system
+
+API Overview
+===================================================================================================
+
+    title: OpenAPI specification for CMS
+	description: API specification document of CMS system
+	contact: deep dabhi
+	version: 1.0
+    API Type: public
+    Server base URL: http://localhost:44333/
+
+Courses
+===================================================================================================
+
+GET     /api/courses
+Content-Type: application/json
+Request: None
+Response:
+    HTTP 200 OK
+    Response Body Format:
+    [
+        {
+            "courseId",
+            "courseName",
+            "courseDuration",
+            "courseType"
+        }
+    ]
+    Example:
+    [
+        {
+            "courseId": 1,
+            "courseName": "Computer Science",
+            "courseDuration": 4,
+            "courseType": "Engineering"
+        }
+    ]
+
+----------------------------------------------------------------------------------------------------
+
+POST    /api/courses
+Content-Type: application/json
+Request:
+    Request body format:
+    {
+        "courseName",
+        "courseDuration",
+        "courseType"
+    }
+    Example:
+    {
+        "courseName": "Computer Science",
+        "courseDuration": 4,
+        "courseType": "Engineering"
+    }
+Response:
+    HTTP 201 Created
+    Response Body Format:
+    {
+        "courseId",
+        "courseName",
+        "courseDuration",
+        "courseType"
+    }
+    Example:
+    {
+        "courseId": 1,
+        "courseName": "Computer Science",
+        "courseDuration": 4,
+        "courseType": "Engineering"
+    }
+
+    HTTP 400 Bad Request
+    Request Body Format:
+    {
+        "error:
+        {
+            "code",
+            "message"
+        }
+    }
+    Example:
+    {
+        "error:
+        {
+            "code": "Invalid Input",
+            "message": "One or more input arguments are invalid"
+        }
+    }
+
+----------------------------------------------------------------------------------------------------
+
+GET     /api/courses/{courseId}
+Content-Type: application/json
+Request: None
+Response:
+    HTTP 200 OK
+    Response Body Format:
+    {
+        "courseId",
+        "courseName",
+        "courseDuration",
+        "courseType"
+    }
+    Example:
+    {
+        "courseId": 1,
+        "courseName": "Computer Science",
+        "courseDuration": 4,
+        "courseType": "Engineering"
+    }
+    HTTP 404 Not Found
+    Request Body Format:
+    {
+        "error:
+        {
+            "code",
+            "message"
+        }
+    }
+    Example:
+    {
+        "error:
+        {
+            "code": "Invalid Input",
+            "message": "One or more input arguments are invalid"
+        }
+    }
+
+----------------------------------------------------------------------------------------------------
+
+PUT     /api/courses/{courseId}
+Content-Type: application/json
+Request:
+    Request body format:
+    {
+        "courseName",
+        "courseDuration",
+        "courseType"
+    }
+    Example:
+    {
+        "courseName": "Computer Science",
+        "courseDuration": 4,
+        "courseType": "Engineering"
+    }
+Response:
+    HTTP 200 OK
+    HTTP 404 Not Found
+
+----------------------------------------------------------------------------------------------------
+
+DELETE  /api/courses/{courseId}
+Content-Type: application/json
+Request: None
+Response:
+    HTTP 200 OK
+    Response Body Format:
+    {
+        "courseId",
+        "courseName",
+        "courseDuration",
+        "courseType"
+    }
+    Example:
+    {
+        "courseId": 1,
+        "courseName": "Computer Science",
+        "courseDuration": 4,
+        "courseType": "Engineering"
+    }
+    HTTP 404 Not Found
+    -- refer GET /api/courses/{courseId }
+----------------------------------------------------------------------------------------------------
+
+DELETE /api/course/{courseId}
+Content-Type: application/json
+Request: None
+Response:
+
+----------------------------------------------------------------------------------------------------
+GET     /api/courses/{courseId}/students
+Content-Type: application/json
+Request: None
+Response:
+    HTTP 204 OK
+        None
+
+    HTTP 404 NOT FOUND
+    -- refer GET/api/courses/{courseId} 
+----------------------------------------------------------------------------------------------------
+
+POST    /api/courses/{courseId}/students
+Content-Type: application/json
+Request: None
+Request:
+    Request body format:
+    {
+        "studentId",
+        "firstName",
+        "lastName",
+        "phoneNumber",
+        "address"
+    }
+    Example:
+    {
+        "studentId": 1
+        "firstName": "James",
+        "lastName": "Smith",
+        "phoneNumber": "555-555-1234",
+        "address": "US"
+    }
+Response:
+    HTTP 201 Created
+    Response Body Format:
+    {
+        "studentId",
+        "firstName",
+        "lastName",
+        "phoneNumber",
+        "address"
+    }
+    Example:
+    {
+        "studentId": 1
+        "firstName": "James",
+        "lastName": "Smith",
+        "phoneNumber": "555-555-1234",
+        "address": "US"
+    }
+    HTTP 400 Bad Request
+    -- refer GET/ api/courses/{courseId}
+----------------------------------------------------------------------------------------------------

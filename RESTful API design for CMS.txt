@@ -78,3 +78,160 @@ step9: check for url complexity
     students
         /api/students
         /api/students/{studentId}
+    
+    combine related resources
+    before: (these urls are completely fine, but there can be some improvements mentioned below)
+        api/students/5/courses
+        api/students/5/hobbies
+    after: improvement in above mentioned urls can be done by combining courses and hobbies at one place
+        api/students/5
+        // it does have some down points like, a person can get information not required at the time
+    
+    Idempotent:
+        making multiple identical requests has the same effect as making a single request
+        GET, PUT & DELETE are most likely to show Idempotency
+            which means that on calling a query having get, put and delete operation multiple times, it wont affect the result
+        POST & PATCH are not so likely to show Idempotency
+            which means that on calling a query having get, put and delete operation multiple times, than it may cause error
+
+----------------------------------------------------------------------------------------------------
+Designing API Operations
+Step 10: Identify the Operations for Each Resource
+    courses
+        /api/courses
+            GET
+            POST
+        /api/courses/{courseId}
+            GET
+            PUT
+            DELETE
+        /api/courses/{courseId}/students
+            GET
+            POST
+
+    students
+        /api/students
+            GET
+            POST
+        /api/students/{studentId}
+            GET
+            PUT
+            DELETE
+
+----------------------------------------------------------------------------------------------------
+Step 11: Identify the parameters required for the operation
+    Query parameters
+        None
+    
+    Path parameters
+        None - collections
+        courseId - Unique course id of the course model
+
+    Headers
+        None
+
+    Cookies
+        None
+ 
+----------------------------------------------------------------------------------------------------    
+Step 12: Identify the Content Type of Request for the Operation
+    Content-Type: application/json
+
+----------------------------------------------------------------------------------------------------
+Step 13: Identify the Request Body for the Operation
+
+----------------------------------------------------------------------------------------------------
+HTTPS status codes for GET Operations
+Successful Operation: 200 OK
+Resource can't be found: 404 Not Found
+
+HTTPS status codes for POST Operations
+Success(new resource created): 201 Created
+Invalid Input: 400 Bad Request
+Success(no new resource): 200 OK
+Success(no result exists): 204 No Content
+
+HTTP Status code for PUT operation
+Successful Update(no new resource): 200 OK
+Success(new resource created): 201 Created
+Success(no result exists): 204 No Content
+
+HTTP Status code for DELETE operation
+Successful deletion: 204 No Content
+Resource can't be found: 404 Not Found
+
+----------------------------------------------------------------------------------------------------
+Step 14: Identify the HTTP Status Codes for the Operation
+    courses
+        /api/courses
+            GET
+                HTTP 200 OK
+            POST
+                HTTP 201 Created
+                HTTP 400 Bad Request
+
+        /api/courses/{courseId}
+            GET
+                HTTP 200 OK
+                HTTP 404 NOT FOUND
+            PUT
+                HTTP 200 OK
+                HTTP 404 Not Found
+            DELETE
+                HTTP 204 No Content
+                HTTP 404 Not Found
+        /api/courses/{courseId}/students
+            GET
+                HTTP 200 OK
+            POST
+                HTTP 201 Created
+                HTTP 400 Bad Request
+
+----------------------------------------------------------------------------------------------------
+Step 15: Identify the Content Type of Response for the Operation
+    application/json
+
+----------------------------------------------------------------------------------------------------
+Step 16: Identify the Response Body for the Operation
+    /api/courses
+        GET
+            (array)
+            courseId
+            courseName
+            courseDuration
+            courseType
+        POST
+            courseId
+            courseName
+            courseDuration
+            courseType
+    
+    /api/courses/{courseId}
+        GET
+            courseId
+            courseName
+            courseDuration
+            courseType
+        PUT
+            courseId
+            courseName
+            courseDuration
+            courseType
+        DELETE
+            None
+    
+    /api/courses/{courseId}/students
+        GET
+            (array)
+            studentId
+            firstName
+            lastName
+            phoneNumber
+            address
+        POST
+            studentId
+            firstName
+            lastName
+            phoneNumber
+            address
+Step 18: Identify the Need for Filtering and Add If Needed
